@@ -82,8 +82,8 @@ user-management-system/
 
 ```
 
-MONGO_URI=your_mongodb_atlas_uri
-JWT_SECRET=your_jwt_secret
+MONGO_URI=mongodb+srv://bhaktikulkarni2411_db_user:Admin12345@cluster0.qdbec9i.mongodb.net/userdb?retryWrites=true&w=majority
+JWT_SECRET=supersecretkey
 NODE_ENV=production
 
 ````
