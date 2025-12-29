@@ -30,7 +30,7 @@ app.use("/api/auth", authRoutes);
 // User & Admin routes
 app.use("/api/users", userRoutes);
 
-// Example protected route
+// Protected test route
 app.get("/api/protected", protect, (req, res) => {
   res.status(200).json({
     message: "Protected route accessed",
@@ -51,10 +51,14 @@ mongoose
   });
 
 // --------------------
-// Start Server
+// Start Server (important for Jest)
 // --------------------
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+}
+
+module.exports = app;
