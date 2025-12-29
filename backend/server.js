@@ -4,12 +4,13 @@ const cors = require("cors");
 require("dotenv").config();
 
 const authRoutes = require("./routes/authRoutes");
+const userRoutes = require("./routes/userRoutes");
 const { protect } = require("./middlewares/authMiddleware");
 
 const app = express();
 
 // --------------------
-// Middleware
+// Global Middleware
 // --------------------
 app.use(cors());
 app.use(express.json());
@@ -26,7 +27,10 @@ app.get("/api/health", (req, res) => {
 // Auth routes
 app.use("/api/auth", authRoutes);
 
-// Protected test route
+// User & Admin routes
+app.use("/api/users", userRoutes);
+
+// Example protected route
 app.get("/api/protected", protect, (req, res) => {
   res.status(200).json({
     message: "Protected route accessed",
@@ -35,7 +39,7 @@ app.get("/api/protected", protect, (req, res) => {
 });
 
 // --------------------
-// Database Connection
+// MongoDB Connection
 // --------------------
 mongoose
   .connect(process.env.MONGO_URI)
